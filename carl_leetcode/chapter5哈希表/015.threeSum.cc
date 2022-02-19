@@ -67,16 +67,16 @@ public:
                     right--;
                 else if ((nums[i] + nums[left] + nums[right]) < 0)
                     left++;
-                else{
+                else
+                {
                     result.push_back({nums[i], nums[left], nums[right]});
-                    while(right > left && nums[right] == nums[right-1])
+                    while (right > left && nums[right] == nums[right - 1])
                         right--;
-                    while(right > left && nums[left] == nums[left+1])
+                    while (right > left && nums[left] == nums[left + 1])
                         left++;
                     right--;
                     left++;
                 }
-                
             }
         }
     }
