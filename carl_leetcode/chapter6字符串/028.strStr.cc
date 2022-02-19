@@ -82,12 +82,12 @@ public:
         {
             while (j >= 1 && (haystack[i] != needle[j]))
                 j = next[j - 1];
-            
-            if(haystack[i] == needle[j])
+
+            if (haystack[i] == needle[j])
                 j++;
 
-            if(j == needle.size())
-                return (i-needle.size()+1);
+            if (j == needle.size())
+                return (i - needle.size() + 1);
         }
         return -1;
     }
