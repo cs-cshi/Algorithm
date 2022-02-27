@@ -18,7 +18,6 @@ class Solution
 public:
     /**
      * 单调栈法：去掉情况二，简化代码
-     *
      */
     int trap(vector<int> &height)
     {
