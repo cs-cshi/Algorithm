@@ -17,9 +17,36 @@ class Solution
 {
 public:
     /**
-     * 单调栈法
+     * 单调栈法：去掉情况二，简化代码
+     *
      */
     int trap(vector<int> &height)
+    {
+        stack<int> stk;
+        stk.push(0);
+        int sum = 0;
+        for (int i = 1; i < height.size(); i++)
+        {
+            while(!stk.empty() && height[i] > height[stk.top()])
+            {
+                int mid = stk.top();
+                stk.pop();
+                if(!stk.empty())
+                {
+                    int width = i - stk.top() - 1;
+                    int h = min(height[i], height[stk.top()]) - height[mid];
+                    sum += width * h;
+                }
+            }
+            stk.push(i);
+        }
+        return sum;
+    }
+
+    /**
+     * 单调栈法
+     */
+    int trap4(vector<int> &height)
     {
         if (height.size() < 3)
             return 0;
@@ -28,14 +55,14 @@ public:
         int sum = 0;
         for (int i = 1; i < height.size(); i++)
         {
-            if (height[i] < height[stk.top()])
+            if (height[i] < height[stk.top()])      // 情况一：下一个台阶更低，不是槽点
                 stk.push(i);
-            else if (height[i] == height[stk.top()])
+            else if (height[i] == height[stk.top()]) // 可以不加这种情况，将其合并到情况一
             {
                 stk.pop();
                 stk.push(i);
             }
-            else // 出现凹槽
+            else // 下一个台阶变高，出现凹槽
             {
                 while (!stk.empty() && height[i] > height[stk.top()])
                 {
