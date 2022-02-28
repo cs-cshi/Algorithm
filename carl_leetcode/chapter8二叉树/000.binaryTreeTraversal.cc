@@ -1,7 +1,9 @@
 #include <vector>
 #include <stack>
 #include <algorithm>
+#include <queue>
 
+using std::queue;
 using std::reverse;
 using std::stack;
 using std::vector;
@@ -230,6 +232,33 @@ vector<int> postorderTraversalByIterateUnite(TreeNode *root)
             stk.pop();
             result.push_back(node->val);
         }
+    }
+    return result;
+}
+
+// 层次遍历中注意每一层如何标识
+vector<vector<int>> levelOrder(TreeNode *root)
+{
+    queue<TreeNode *> que;
+    vector<vector<int>> result;
+    if (!root)
+        return result;
+    que.push(root);
+    while (!que.empty())
+    {
+        vector<int> levelVec;
+        int levelSize = que.size();
+        while (levelSize--)
+        {
+            TreeNode *node = que.front();
+            que.pop();
+            levelVec.push_back(node->val);
+            if (node->left)
+                que.push(node->left);
+            if (node->right)
+                que.push(node->right);
+        }
+        result.push_back(levelVec);
     }
     return result;
 }
