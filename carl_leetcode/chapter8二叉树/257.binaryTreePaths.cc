@@ -4,7 +4,9 @@
  */
 #include <vector>
 #include <string>
+#include <stack>
 
+using std::stack;
 using std::string;
 using std::vector;
 
@@ -74,5 +76,38 @@ public:
 
         if (cur->right)
             traversal2(cur->right, path + "->", result);
+    }
+
+    vector<string> binaryTreePathsByIterate(TreeNode *root)
+    {
+        stack<TreeNode *> treeStk;
+        stack<string> pathStk;
+        vector<string> result;
+        if (root == nullptr)
+            return result;
+        treeStk.emplace(root);
+        pathStk.emplace(std::to_string(root->val));
+        while (!treeStk.empty())
+        {
+            TreeNode *node = treeStk.top();
+            treeStk.pop();
+            string path = pathStk.top();        // path 表示当前路径
+            pathStk.pop();
+            if (node->left == nullptr && node->right == nullptr)
+                result.emplace_back(path);
+
+            if (node->left)
+            {
+                treeStk.emplace(node->left);
+                pathStk.emplace(path + "->" + std::to_string(node->left->val));
+            }
+
+            if (node->right)
+            {
+                treeStk.emplace(node->right);
+                pathStk.emplace(path + "->" + std::to_string(node->right->val));
+            }
+        }
+        return result;
     }
 };
