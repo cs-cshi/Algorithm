@@ -35,6 +35,27 @@ void preorderTraversalByRecursion(TreeNode *root, vector<int> &vec)
     preorderTraversalByRecursion(root->right, vec);
 }
 
+// 2022.03.05 练习
+vector<int> preorderTraversalByIterate2(TreeNode *root)
+{
+    vector<int> result;
+    if (root == nullptr)
+        return result;
+    stack<TreeNode *> stk;
+    stk.push(root);
+    while (!stk.empty())
+    {
+        TreeNode *cur = stk.top();
+        stk.pop();
+        result.push_back(cur->val);
+        if (cur->right)
+            stk.push(cur->right);
+        if (cur->left)
+            stk.push(cur->left);
+    }
+    return result;
+}
+
 // 前序遍历迭代实现
 vector<int> preorderTraversalByIterate(TreeNode *root)
 {
@@ -104,6 +125,31 @@ void inorderTraversalByRecursion(TreeNode *root, vector<int> &vec)
     inorderTraversalByRecursion(root->left, vec);
     vec.push_back(root->val);
     inorderTraversalByRecursion(root->right, vec);
+}
+
+vector<int> inorderTraversalByIterate2(TreeNode *root)
+{
+    vector<int> result;
+    if (root == nullptr)
+        return result;
+    stack<TreeNode *> stk;
+    // stk.push(root);          // 不需要先 push
+    TreeNode *cur = root;
+    while (cur != nullptr || !stk.empty())
+    {
+        if (cur != nullptr)
+        {
+            stk.push(cur);
+            cur = cur->left;
+        }
+        else
+        {
+            cur = stk.top();
+            stk.pop();
+            result.emplace_back(cur->val);
+            cur = cur->right;
+        }
+    }
 }
 
 // 中序遍历迭代实现
