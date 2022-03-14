@@ -11,6 +11,7 @@ int search(vector<int> &nums, int target)
     if (nums.size() <= 0)
         return -1;
 
+    // 左闭右闭区间 []
     int left = 0;
     int right = nums.size() - 1;
 
@@ -29,7 +30,23 @@ int search(vector<int> &nums, int target)
     return -1;
 }
 
-int main()
+int search(vector<int> &nums, int target)
 {
-    return 0;
+    if(nums.size() <= 0)
+        return -1;
+
+    // 左闭右开 [)
+    int left = 0;
+    int right = nums.size();
+    while(left < right)
+    {
+        int mid = left + (right - left) >> 1;
+        if(nums[mid]==target)
+            return mid;
+        else if (nums[mid] > target)
+            right = mid;
+        else
+            left = mid + 1;
+    }
+    return -1;
 }

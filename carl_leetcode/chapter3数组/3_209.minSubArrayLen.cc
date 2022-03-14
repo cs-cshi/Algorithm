@@ -6,7 +6,6 @@
 
 using std::vector;
 
-
 /**
  * 滑动窗口 3 要素：
  * 1. 窗口内元素
@@ -18,8 +17,9 @@ using std::vector;
  * 2. 移动起始位置：当前窗口和大于等于 target
  * 3. 移动终止位置：当前窗口和小于 target
  * 通过终止位置遍历指针
- */ 
-int minSubArrayLen(int target, vector<int>& nums) {
+ */
+int minSubArrayLen(int target, vector<int> &nums)
+{
     int result = __INT32_MAX__;
     int sum = 0;
     int subLength = 0;
@@ -27,18 +27,32 @@ int minSubArrayLen(int target, vector<int>& nums) {
     for (size_t i = 0; i < nums.size(); i++)
     {
         sum += nums[i];
-        while ( sum >= target ){
+        while (sum >= target)
+        {
             subLength = i - startIndex + 1;
             result = result < subLength ? result : subLength;
             sum -= nums[startIndex++];
         }
     }
-    return result == __INT32_MAX__ ? 0 : result; 
+    return result == __INT32_MAX__ ? 0 : result;
 }
 
-int main(){
-
+// 第二次练习
+int minSubArrayLen2(int target, vector<int> &nums)
+{
+    int maxSize = __INT32_MAX__;
+    int left = 0;
+    int curSum = 0;
+    int subLength = 0;
+    for (int right = 0; right < nums.size(); right++)
+    {
+        curSum += nums[right];
+        while (curSum >= target)
+        {
+            subLength = right - left + 1;
+            maxSize = maxSize > subLength ? subLength : maxSize;
+            curSum -= nums[left++];     // 同时移动滑动窗口左边界
+        }
+    }
+    return maxSize == __INT32_MAX__ ? 0 : maxSize;
 }
-
-
-

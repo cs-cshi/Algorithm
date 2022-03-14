@@ -9,9 +9,15 @@
  */
 #include <vector>
 #include <stack>
+#include <unordered_map>
+#include <utility>
+#include <algorithm>
 
 using std::stack;
+using std::unordered_map;
 using std::vector;
+using std::pair;
+using std::sort;
 
 class Solution
 {
@@ -78,5 +84,41 @@ public:
             }
         }
         return result;
+    }
+
+    bool static cmp(const pair<int, int>& a,const pair<int,int> &b)
+    {
+        return a.second > b.second;
+    }
+
+    // 普通二叉树中频率出现最高的节点的值
+    vector<int> findModeInCommonBinaryTree(TreeNode *root)
+    {
+        unordered_map<int,int> map;
+        vector<int> result;
+        if(root==nullptr)
+            return result;
+        traversalBT(root,map);
+        vector<pair<int,int>> vec(map.begin(),map.end());
+        sort(vec.begin(),vec.end(),cmp);
+        result.push_back(vec[0].first);
+        for(int i=1;i<vec.size();i++)
+        {
+            if(vec[i].second == vec[0].second)
+                result.push_back(vec[i].first);
+            else 
+                break;
+        }
+        return result;
+    }
+
+    void traversalBT(TreeNode *root, unordered_map<int, int> &map)
+    {
+        if (root == nullptr)
+            return;
+        map[root->val]++;
+        traversalBT(root->left, map);
+        traversalBT(root->right, map);
+        return;
     }
 };

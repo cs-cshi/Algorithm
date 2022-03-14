@@ -7,7 +7,7 @@
 
 using std::vector;
 
-// 快慢指针
+// 快慢指针，不会更改原数组元素顺序
 int removeElement(vector<int> &nums, int val)
 {
     int slowIndex = 0;
@@ -20,7 +20,7 @@ int removeElement(vector<int> &nums, int val)
     return slowIndex;
 }
 
-// 首尾双指针，能避免不必要的移动
+// 首尾双指针，能避免不必要的移动，但会更改原数组顺序
 int removeElement(vector<int> &nums, int val)
 {
     int firstIndex = 0;
@@ -30,7 +30,7 @@ int removeElement(vector<int> &nums, int val)
     {
         if (nums[firstIndex] == val)
         {
-            // 实际上这里可以不交换，题目要求只要保证不等于 val 的值在数组前面部分即可
+            // 实际上这里可以不交换，直接赋值替代，题目要求只要保证不等于 val 的值在数组前面部分即可
             int temp = nums[firstIndex];
             nums[firstIndex] = nums[lastIndex];
             nums[lastIndex] = nums[firstIndex];
