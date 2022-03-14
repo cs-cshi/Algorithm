@@ -56,4 +56,42 @@ vector<vector<int>> generateMatrix(int n)
 
 vector<vector<int>> generateMatrix(int n)
 {
+    vector<vector<int>> result(n, vector<int>(n, 0));
+    int loop = n / 2;
+    int startX = 0;
+    int startY = 0;
+    int offset = 1; //每一圈的长度
+    int mid = n / 2;
+    int count = 1;
+    int i, j;
+    while (loop--)
+    {
+        i = startX;
+        j = startY;
+
+        // 上界左->右
+        for (; j < startY + n - offset; j++)
+            result[i][j] = count++;
+
+        // 右界上->下
+        for (; i < startX + n - offset; i++)
+            result[i][j] = count++;
+
+        // 下界右->左
+        for (; j > startY; j--)
+            result[i][j] = count++;
+
+        // 左界下->上
+        for (; i > startX; i--)
+            result[i][j] = count++;
+
+        startX++;
+        startY++;
+        offset += 2;
+    }
+
+    if(n%2==1)
+        result[mid][mid] = count;
+
+    return result;
 }
