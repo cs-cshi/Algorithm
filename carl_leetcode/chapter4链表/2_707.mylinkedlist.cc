@@ -107,14 +107,14 @@ private:
 
 int main()
 {
-    MyListedList *myListedList = new MyListedList();
-    myListedList->addAtTail(3);
-    myListedList->addAtHead(1);
-    myListedList->addAtHead(2);
-    myListedList->printLinkedList();
-    myListedList->addAtIndex(1, 4);
-    myListedList->printLinkedList();
-    cout << myListedList->get(1) << endl;
-    myListedList->deleteAtIndex(2);
-    cout << myListedList->get(2) << endl;
+    MyLinkedList *myLinkedList = new MyLinkedList();
+    myLinkedList->addAtTail(3);
+    myLinkedList->addAtHead(1);
+    myLinkedList->addAtHead(2);
+    myLinkedList->printLinkedList();
+    myLinkedList->addAtIndex(1, 4);
+    myLinkedList->printLinkedList();
+    cout << myLinkedList->get(1) << endl;
+    myLinkedList->deleteAtIndex(2);
+    cout << myLinkedList->get(2) << endl;
 }
