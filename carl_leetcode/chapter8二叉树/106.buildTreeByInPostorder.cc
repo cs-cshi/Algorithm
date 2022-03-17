@@ -2,6 +2,7 @@
  * 给定两个整数数组 inorder 和 postorder ，其中 inorder 是二叉树的中序遍历， postorder 是同一棵树的后序遍历，请你构造并返回这颗 二叉树 。
  * 链接：https://leetcode-cn.com/problems/construct-binary-tree-from-inorder-and-postorder-traversal
  */
+#include "treeNode.hh"
 #include <vector>
 
 using std::vector;
@@ -10,15 +11,15 @@ class Solution
 {
 public:
     // Definition for a binary tree node.
-    struct TreeNode
-    {
-        int val;
-        TreeNode *left;
-        TreeNode *right;
-        TreeNode() : val(0), left(nullptr), right(nullptr) {}
-        TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
-        TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
-    };
+    // struct TreeNode
+    // {
+    //     int val;
+    //     TreeNode *left;
+    //     TreeNode *right;
+    //     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+    //     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+    //     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+    // };
 
     TreeNode *buildTree(vector<int> &inorder, vector<int> &postorder)
     {
@@ -114,6 +115,6 @@ int main()
     Solution solution;
     vector<int> inorder = {9, 3, 15, 20, 7};
     vector<int> postorder = {9, 15, 7, 20, 3};
-    Solution::TreeNode *root = nullptr;
+    TreeNode *root = nullptr;
     solution.buildTree(inorder, postorder);
 }

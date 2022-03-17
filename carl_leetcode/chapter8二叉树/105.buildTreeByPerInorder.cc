@@ -2,6 +2,7 @@
  * 给定两个整数数组 preorder 和 inorder ，其中 preorder 是二叉树的先序遍历， inorder 是同一棵树的中序遍历，请构造二叉树并返回其根节点。
  * 链接：https://leetcode-cn.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/
  */
+#include "treeNode.hh"
 #include <vector>
 #include <unordered_map>
 
@@ -12,15 +13,15 @@ class Solution
 {
 public:
     // Definition for a binary tree node.
-    struct TreeNode
-    {
-        int val;
-        TreeNode *left;
-        TreeNode *right;
-        TreeNode() : val(0), left(nullptr), right(nullptr) {}
-        TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
-        TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
-    };
+    // struct TreeNode
+    // {
+    //     int val;
+    //     TreeNode *left;
+    //     TreeNode *right;
+    //     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+    //     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+    //     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+    // };
 
     TreeNode *buildTree(vector<int> &preorder, vector<int> &inorder)
     {

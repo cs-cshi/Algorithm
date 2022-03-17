@@ -2,6 +2,7 @@
  * 给你二叉树的根节点 root 和一个整数目标和 targetSum ，找出所有 从根节点到叶子节点 路径总和等于给定目标和的路径。
  * 链接：https://leetcode-cn.com/problems/path-sum-ii/
  */
+#include "treeNode.hh"
 #include <vector>
 
 using std::vector;
@@ -10,15 +11,15 @@ class Solution
 {
 public:
     // Definition for a binary tree node.
-    struct TreeNode
-    {
-        int val;
-        TreeNode *left;
-        TreeNode *right;
-        TreeNode() : val(0), left(nullptr), right(nullptr) {}
-        TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
-        TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
-    };
+    // struct TreeNode
+    // {
+    //     int val;
+    //     TreeNode *left;
+    //     TreeNode *right;
+    //     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+    //     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+    //     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+    // };
 
     vector<vector<int>> pathSum(TreeNode *root, int targetSum)
     {

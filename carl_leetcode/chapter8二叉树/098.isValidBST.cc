@@ -6,6 +6,7 @@
  *    所有左子树和右子树自身必须也是二叉搜索树。
  * 链接：https://leetcode-cn.com/problems/validate-binary-search-tree
  */
+#include "treeNode.hh"
 #include <limits>
 #include <stack>
 
@@ -15,15 +16,15 @@ using std::stack;
 class Solution
 {
 public:
-    struct TreeNode
-    {
-        int val;
-        TreeNode *left;
-        TreeNode *right;
-        TreeNode() : val(0), left(nullptr), right(nullptr) {}
-        TreeNode(int val) : val(val), left(nullptr), right(nullptr) {}
-        TreeNode(int val, TreeNode *left, TreeNode *right) : val(val), left(left), right(right) {}
-    };
+    // struct TreeNode
+    // {
+    //     int val;
+    //     TreeNode *left;
+    //     TreeNode *right;
+    //     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+    //     TreeNode(int val) : val(val), left(nullptr), right(nullptr) {}
+    //     TreeNode(int val, TreeNode *left, TreeNode *right) : val(val), left(left), right(right) {}
+    // };
 
     // 每个节点都有上界和下界
     bool isValidBST(TreeNode *root)

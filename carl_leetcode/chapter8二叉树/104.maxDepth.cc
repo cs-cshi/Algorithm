@@ -3,7 +3,7 @@
  * 二叉树的深度为根节点到最远叶子节点的最长路径上的节点数。
  * 链接：https://leetcode-cn.com/problems/maximum-depth-of-binary-tree/
  */
-
+#include "treeNode.hh"
 #include <queue>
 #include <algorithm>
 
@@ -13,15 +13,15 @@ using std::max;
 class Solution
 {
 public:
-    struct TreeNode
-    {
-        int val;
-        TreeNode *left;
-        TreeNode *right;
-        TreeNode() : val(0), left(nullptr), right(nullptr) {}
-        TreeNode(int val) : val(val), left(nullptr), right(nullptr) {}
-        TreeNode(int val, TreeNode *left, TreeNode *right) : val(val), left(left), right(right) {}
-    };
+    // struct TreeNode
+    // {
+    //     int val;
+    //     TreeNode *left;
+    //     TreeNode *right;
+    //     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+    //     TreeNode(int val) : val(val), left(nullptr), right(nullptr) {}
+    //     TreeNode(int val, TreeNode *left, TreeNode *right) : val(val), left(left), right(right) {}
+    // };
 
     // 后序遍历，递归
     int maxDepth(TreeNode *root)

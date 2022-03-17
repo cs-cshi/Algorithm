@@ -7,6 +7,7 @@
  *     左子树和右子树都是二叉搜索树
  * 链接：https://leetcode-cn.com/problems/find-mode-in-binary-search-tree
  */
+#include "treeNode.hh"
 #include <vector>
 #include <stack>
 #include <unordered_map>
@@ -22,15 +23,15 @@ using std::sort;
 class Solution
 {
 public:
-    struct TreeNode
-    {
-        int val;
-        TreeNode *left;
-        TreeNode *right;
-        TreeNode() : val(0), left(nullptr), right(nullptr) {}
-        TreeNode(int val) : val(val), left(nullptr), right(nullptr) {}
-        TreeNode(int val, TreeNode *left, TreeNode *right) : val(val), left(left), right(right) {}
-    };
+    // struct TreeNode
+    // {
+    //     int val;
+    //     TreeNode *left;
+    //     TreeNode *right;
+    //     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+    //     TreeNode(int val) : val(val), left(nullptr), right(nullptr) {}
+    //     TreeNode(int val, TreeNode *left, TreeNode *right) : val(val), left(left), right(right) {}
+    // };
 
     vector<int> findMode(TreeNode *root)
     {

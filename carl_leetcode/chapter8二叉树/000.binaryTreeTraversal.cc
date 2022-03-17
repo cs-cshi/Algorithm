@@ -1,3 +1,4 @@
+#include "treeNode.hh"
 #include <vector>
 #include <stack>
 #include <algorithm>
@@ -8,14 +9,14 @@ using std::reverse;
 using std::stack;
 using std::vector;
 
-struct TreeNode
-{
-    int val;
-    TreeNode *left;
-    TreeNode *right;
-    TreeNode() : val(0), left(nullptr), right(nullptr) {}
-    TreeNode(int val) : val(val), left(nullptr), right(nullptr) {}
-};
+// struct TreeNode
+// {
+//     int val;
+//     TreeNode *left;
+//     TreeNode *right;
+//     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+//     TreeNode(int val) : val(val), left(nullptr), right(nullptr) {}
+// };
 
 // 前序遍历
 vector<int> preorderTraversal(TreeNode *root)

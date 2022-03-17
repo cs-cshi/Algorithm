@@ -2,6 +2,7 @@
  * 给你一个二叉树的根节点 root ，按 任意顺序 ，返回所有从根节点到叶子节点的路径。
  * 链接：https://leetcode-cn.com/problems/binary-tree-paths/
  */
+#include "treeNode.hh"
 #include <vector>
 #include <string>
 #include <stack>
@@ -14,15 +15,15 @@ class Solution
 {
 public:
     // Definition for a binary tree node.
-    struct TreeNode
-    {
-        int val;
-        TreeNode *left;
-        TreeNode *right;
-        TreeNode() : val(0), left(nullptr), right(nullptr) {}
-        TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
-        TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
-    };
+    // struct TreeNode
+    // {
+    //     int val;
+    //     TreeNode *left;
+    //     TreeNode *right;
+    //     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+    //     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+    //     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+    // };
 
     vector<string> binaryTreePaths(TreeNode *root)
     {

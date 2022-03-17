@@ -3,6 +3,7 @@
  * 合并的规则是：如果两个节点重叠，那么将这两个节点的值相加作为合并后节点的新值；否则，不为 null 的节点将直接作为新二叉树的节点。
  * 返回合并后的二叉树。
  */
+#include "treeNode.hh"
 #include <queue>
 
 using std::queue;
@@ -11,15 +12,15 @@ class Solution
 {
 public:
     // Definition for a binary tree node.
-    struct TreeNode
-    {
-        int val;
-        TreeNode *left;
-        TreeNode *right;
-        TreeNode() : val(0), left(nullptr), right(nullptr) {}
-        TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
-        TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
-    };
+    // struct TreeNode
+    // {
+    //     int val;
+    //     TreeNode *left;
+    //     TreeNode *right;
+    //     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+    //     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+    //     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+    // };
 
     TreeNode *mergeTrees(TreeNode *root1, TreeNode *root2)
     {
