@@ -6,7 +6,7 @@
  *      输入字符串 s 可以在前面、后面或者单词间包含多余的空格。
  *      翻转后单词间应当仅用一个空格分隔。
  *      翻转后的字符串中不应包含额外的空格。
-*/
+ */
 #include <string>
 #include <algorithm>
 
@@ -77,8 +77,71 @@ public:
             if (entry && i == (s.size() - 1) && s[i] != ' ')
             {
                 end = i;
-                reverse(s, start,end);                                                                                                                                                                                                                                                                                   
+                reverse(s, start, end);
             }
         }
+    }
+
+    void reverse2(string &s, int start, int end)
+    {
+        for (int i = start, j = end; i < j; i++, j--)
+            swap(s[i], s[j]);
+    }
+
+    void removeExtraSpace2(string &s)
+    {
+        int fastIndex = 0;
+        int slowIndex = 0;
+        // 头部去除空格
+        while (fastIndex < s.size() && s[fastIndex] == ' ')
+            fastIndex++;
+
+        // 中间去除冗余空格，连续两个都为空格为冗余
+        while (fastIndex < s.size())
+        {
+            if (fastIndex > 1 && s[fastIndex] == ' ' && s[fastIndex] == s[fastIndex - 1])
+                fastIndex++;
+            else
+                s[slowIndex++] = s[fastIndex++];
+        }
+
+        // 尾部去除空格
+        if (slowIndex > 0 && s[slowIndex - 1] == ' ')
+            s.resize(slowIndex - 1);
+        else
+            s.resize(slowIndex);
+    }
+
+    string reverseWords2(string s)
+    {
+        removeExtraSpace2(s);
+        reverse2(s, 0, s.size() - 1);
+        bool flag = false;
+        int wordStart = 0;
+        int wordEnd = 0;
+        for (int i = 0; i < s.size(); i++)
+        {
+            // 开始进入某个单词
+            if (!flag || (s[i] != ' ' && s[i - 1] == ' '))
+            {
+                wordStart = i;
+                flag = true;
+            }
+            // 遇到空格，单词分隔符
+            if (flag && s[i] == ' ')
+            {
+                wordEnd = i - 1;
+                reverse2(s, wordStart, wordEnd);
+                flag = false;
+            }
+
+            // 最后一个单词
+            if (flag && i == s.size() - 1)
+            {
+                wordEnd = i;
+                reverse2(s,wordStart, wordEnd);
+            }
+        }
+        return s;
     }
 };
