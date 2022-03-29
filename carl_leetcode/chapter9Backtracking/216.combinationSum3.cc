@@ -37,7 +37,7 @@ public:
         for (int i = startIndex; i <= 9; i++) // 横向
         {
             if (sum > n) // 剪枝，当前 sum 和已经大于 targetSum 了，不需要向后回溯（给定元素递增）
-                break;  // 当前都不需要再横向了，有序
+                break;   // 当前都不需要再横向了，有序
             path.push_back(i);
             sum += i;
             backtracking(result, path, i + 1, sum, k, n); // 注意 i+1，纵向
