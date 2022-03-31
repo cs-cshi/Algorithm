@@ -23,17 +23,25 @@ public:
         sort(s.begin(), s.end());
 
         int count = 0;
-        for (int i = 0, j = 0; i < g.size() && j < s.size();)
+        // for (int i = 0, j = 0; i < g.size() && j < s.size();)
+        // {
+        //     if (s[j] >= g[i])
+        //     {
+        //         count++;
+        //         j++;
+        //         i++;
+        //     }
+        //     else
+        //         j++;
+        // }
+
+        // 优化代码
+        for (int i = 0; i < s.size(); i++)
         {
-            if (s[j] >= g[i])
-            {
+            if (count < g.size() && g[count] <= s[i])
                 count++;
-                j++;
-                i++;
-            }
-            else
-                j++;
         }
+
         return count;
     }
 };
