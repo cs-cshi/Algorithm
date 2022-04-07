@@ -43,4 +43,26 @@ public:
         }
         return dp[m][n];
     }
+
+    int findMaxForm2(vector<string> &strs, int m, int n)
+    {
+        // dp[i][j] (i,j)的背包容纳最大子集长度
+        vector<vector<int>> dp(m + 1, vector<int>(n + 1, 0));
+
+        // dp[i][j] = max(dp[i][j],dp[i-zeroNum][j-oneNum]+1)
+        for (string str : strs)
+        {
+            int zeroNum = 0;
+            int oneNum = 0;
+            for (char c : str)
+                if (c == '0')
+                    zeroNum++;
+                else
+                    oneNum++;
+            for (int i = m; i >= zeroNum; i--)
+                for (int j = n; j >= oneNum; j--)
+                    dp[i][j] = max(dp[i][j], dp[i - zeroNum][j - oneNum] + 1);
+        }
+        return dp[m][n];
+    }
 };
