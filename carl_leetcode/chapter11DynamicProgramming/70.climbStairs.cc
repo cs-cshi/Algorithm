@@ -10,6 +10,7 @@ using std::vector;
 
 class Solution
 {
+
 public:
     int climbStairs(int n)
     {
@@ -31,19 +32,19 @@ public:
 
         for (int i = 2; i < n; i++)
             dp[i] = dp[i - 1] + dp[i - 2];
-        
-        return dp[n-1];
+
+        return dp[n - 1];
     }
 
     int climbStairs3(int n)
     {
-        if(n<=2)
+        if (n <= 2)
             return n;
         int pre = 1;
         int last = 2;
         int result = 0;
 
-        for(int i = 2; i<n;i++)
+        for (int i = 2; i < n; i++)
         {
             result = pre + last;
             pre = last;
