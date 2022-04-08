@@ -36,4 +36,20 @@ public:
         }
         return false;
     }
+
+    bool dynamicProgramming(string &s, vector<string> &wordDict)
+    {
+        // dp[i] 字符串 s 前 i 个字符可以拆分为一个或多个字典中的单词
+        // dp[j] = dp[i] && check(s[i,j-i+1])
+        // dp[0] true
+        // 顺序：从前往后
+
+        vector<bool> dp(s.length() + 1);
+        unordered_set<string> wordSet(wordDict.begin(), wordDict.end());
+        for (int i = 0; i < s.size(); i++)
+            for (int j = 1; i <= i; j++)
+                if (wordSet.find(s.substr(j, j - i)) != wordSet.end() && dp[j])
+                    dp[j] = true;
+        return dp[s.size()];
+    }
 };
