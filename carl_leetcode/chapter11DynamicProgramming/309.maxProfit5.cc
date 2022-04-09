@@ -8,7 +8,9 @@
  */
 
 #include <vector>
+#include <algorithm>
 
+using std::max;
 using std::vector;
 
 class Solution
@@ -28,9 +30,40 @@ public:
          *      // 卖出，非冷冻期：1.维持昨天卖出可操作状态，2. 昨天是冷冻期
          *      dp[i][1] = max(dp[i-1][1],dp[i-1][3])
          *      // 卖出，进入冷冻期。1. 昨天的买入状态
-         *    dp[i][2] = dp[i-1][0] + prices[i]
+         *      dp[i][2] = dp[i-1][0] + prices[i]
          *      // 冷冻期，昨天的卖出进入冷冻期状态
-         *    dp[i][3] = dp[i-1][2]
-        */
+         *      dp[i][3] = dp[i-1][2]
+         */
+        vector<vector<int>> dp(prices.size(), vector<int>(4, 0));
+        dp[0][0] = -prices[0];
+        // dp[0][1] = 0;
+        // dp[0][2] = 0;
+        // dp[0][3] = 0;
+        for (int i = 1; i < prices.size(); i++)
+        {
+            dp[i][0] = max(dp[i - 1][0], max(dp[i - 1][1], dp[i - 1][3]) - prices[i]);
+            dp[i][1] = max(dp[i - 1][1], dp[i - 1][3]);
+            dp[i][2] = dp[i - 1][0] + prices[i];
+            dp[i][3] = dp[i - 1][2];
+        }
+        return max(dp[prices.size() - 1][3], dp[prices.size() - 1][1], dp[prices.size() - 1][2]);
+    }
+
+    int maxProfit(vector<int> &prices)
+    {
+        vector<vector<int>> dp(2, vector<int>(4, 0));
+        dp[0][0] = -prices[0];
+        for(int i = 1;i<prices.size();i++)
+        {
+            dp[1][0] = max(dp[0][0],max(dp[0][1],dp[0][3])-prices[i]);
+            dp[1][1] = max(dp[0][1],dp[0][3]);
+            dp[1][2] = dp[0][0] + prices[i];
+            dp[1][3] = dp[0][2];
+            dp[0][0] = dp[1][0];
+            dp[0][1] = dp[1][1];
+            dp[0][2] = dp[1][2];
+            dp[0][3] = dp[1][3];
+        }
+        return max(dp[1][1],max(dp[1][2],dp[1][3]));
     }
 };
