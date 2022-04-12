@@ -1,47 +1,35 @@
-#include <string>
-#include <map>
 #include <iostream>
-#include <utility>
 
-using std::cout;
-using std::endl;
-using std::map;
-using std::pair;
-using std::string;
+using namespace ::std;
 
-class node
+class Obj
 {
 public:
-    int val;
-    string str;
+    Obj() { puts("Obj()"); }
+    Obj(int m) : m(m) { cout << "Obj()"
+                             << " " << m << endl; }
+    ~Obj() { cout << "~Obj()" << m << endl; }
 
-public:
-    node() : val(0), str("") {}
-    node(int val, string str) : val(val), str(str) {}
+private:
+    int m;
 };
 
-struct Cmp
+void foo(int n)
 {
-    bool operator()(node const &node1, node const &node2) const
-    {
-        // return node1.val < node2.val;
-        if (node1.val < node2.val)
-            return true;
-        else if (node1.val > node2.val)
-            return false;
-        else
-            return node1.str < node2.str;
-    }
-};
+    Obj obj(n);
+    if (n == 42)
+        throw "life, the universe and everything";
+}
 
 int main()
 {
-
-    map<node, int, Cmp> map;
-    map.insert({node{1, "def"}, 3});
-    map.insert({node{1, "abc"}, 1});
-    map.insert({node{1, "bcd"}, 2});
-
-    for (auto iter : map)
-        cout << iter.first.str << endl;
+    try
+    {
+        foo(41);
+        foo(42);
+    }
+    catch (const char *s)
+    {
+        puts(s);
+    }
 }
