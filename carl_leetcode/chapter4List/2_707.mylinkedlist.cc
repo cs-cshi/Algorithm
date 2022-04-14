@@ -105,9 +105,100 @@ private:
     LinkedNode *_dummyHead;
 };
 
+class MyLinkedList2
+{
+public:
+    // 链表节点结构体
+    struct LinkedNode
+    {
+        int val;
+        LinkedNode *next;
+        LinkedNode() : val(0), next(nullptr) {}
+        LinkedNode(int val) : val(val), next(nullptr) {}
+    };
+
+    MyLinkedList2()
+    {
+        dummyHead = new LinkedNode(0);
+        dummyHead->next = nullptr;
+        _size = 0;
+    }
+
+    void addAtTail(int val)
+    {
+        LinkedNode *newNode = new LinkedNode(val);
+        LinkedNode *cur = dummyHead;
+        while (cur->next != nullptr)
+            cur = cur->next;
+        cur->next = newNode;
+        _size++;
+    }
+
+    void addAtHead(int val)
+    {
+        LinkedNode *newNode = new LinkedNode(val);
+        newNode->next = dummyHead->next;
+        dummyHead->next = newNode;
+        _size++;
+    }
+
+    void printLinkedList()
+    {
+        LinkedNode *cur = dummyHead->next;
+        while (cur != nullptr)
+        {
+            cout << cur->val;
+            if (cur->next)
+                cout << "->";
+            cur = cur->next;
+        }
+        cout << endl;
+    }
+
+    void addAtIndex(int index, int val)
+    {
+        if (index > _size)
+            return;
+        LinkedNode *newNode = new LinkedNode(val);
+        LinkedNode *cur = dummyHead;
+        while (index--)
+            cur = cur->next;
+        newNode->next = cur->next;
+        cur->next = newNode;
+        _size++;
+    }
+
+    int get(int index)
+    {
+        if (index > (_size - 1) || index < 0)
+            return -1;
+        LinkedNode *cur = dummyHead->next;
+        while (index--)
+            cur = cur->next;
+        return cur->val;
+    }
+
+    void deleteAtIndex(int index)
+    {
+        if (index > (_size - 1) || index < 0)
+            return;
+        LinkedNode *cur = dummyHead;
+        while (index--)
+            cur = cur->next;
+        LinkedNode *temp = cur->next;
+        cur->next = cur->next->next;
+        delete temp;
+        _size--;
+    }
+
+private:
+    int _size;
+    LinkedNode *dummyHead;
+};
+
 int main()
 {
-    MyLinkedList *myLinkedList = new MyLinkedList();
+    MyLinkedList2 *myLinkedList = new MyLinkedList2();
     myLinkedList->addAtTail(3);
     myLinkedList->addAtHead(1);
     myLinkedList->addAtHead(2);
