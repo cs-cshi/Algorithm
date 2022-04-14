@@ -54,7 +54,7 @@ vector<vector<int>> generateMatrix(int n)
     return res;
 }
 
-vector<vector<int>> generateMatrix(int n)
+vector<vector<int>> generateMatrix2(int n)
 {
     vector<vector<int>> result(n, vector<int>(n, 0));
     int loop = n / 2;
@@ -90,8 +90,47 @@ vector<vector<int>> generateMatrix(int n)
         offset += 2;
     }
 
-    if(n%2==1)
+    if (n % 2 == 1)
         result[mid][mid] = count;
 
     return result;
+}
+
+vector<vector<int>> generateMatrix3(int n)
+{
+    int offset = 1;
+    int startX = 0, startY = 0;
+    int loop = n / 2;
+    int count = 1;
+    vector<vector<int>> res(n, vector<int>(n));
+
+    while (loop--)
+    {
+        int i = startX;
+        int j = startY;
+
+        // 上界从左至右
+        for (; j < n + startY - offset; j++)
+            res[i][j] = count++;
+
+        // 右界从上至下
+        for (; i < n + startX - offset; i++)
+            res[i][j] = count++;
+
+        // 下届从右至左
+        for (; j > startY; j--)
+            res[i][j] = count++;
+
+        // 左界从下至上
+        for (; i > startX; i--)
+            res[i][j] = count++;
+
+        startX++;
+        startY++;
+        offset += 2;
+    }
+    if (n % 2 == 1)
+        res[n / 2][n / 2] = count;
+
+    return res;
 }
