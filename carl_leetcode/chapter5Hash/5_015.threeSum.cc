@@ -33,7 +33,7 @@ public:
 
                 int c = 0 - nums[i] - nums[j];
 
-                if (set.find(c) == set.end())
+                if (set.find(c) != set.end())
                 {
                     result.push_back({nums[i], nums[j], c});
                     set.erase(c);
