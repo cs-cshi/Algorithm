@@ -19,9 +19,7 @@ public:
     void reverse(string &s, int start, int end) // [start, end]，索引
     {
         for (int i = start, j = end; i < j; i++, j--)
-        {
             swap(s[i], s[j]);
-        }
     }
 
     void removeExtraSpace(string &s)
@@ -139,7 +137,53 @@ public:
             if (flag && i == s.size() - 1)
             {
                 wordEnd = i;
-                reverse2(s,wordStart, wordEnd);
+                reverse2(s, wordStart, wordEnd);
+            }
+        }
+        return s;
+    }
+
+    string reverseWords(string s)
+    {
+        int slow = 0;
+        int fast = 0;
+        while (fast < s.size() && s[fast] == ' ')
+            fast++;
+
+        while (fast < s.size())
+        {
+            if (fast > 1 && s[fast] == ' ' && s[fast] == s[fast - 1])
+                fast++;
+            else
+                s[slow++] = s[fast++];
+        }
+
+        if (slow > 0 && s[slow - 1] == ' ')
+            s.resize(slow - 1);
+        else
+            s.resize(slow);
+        reverse(s, 0, s.size() - 1);
+        bool flag = false;
+        int start = 0;
+        int end;
+        for (int i = 0; i < s.size(); i++)
+        {
+            if (flag == false)
+            {
+                start = i;
+                flag = true;
+            }
+
+            if (flag && s[i] == ' ')
+            {
+                end = i - 1;
+                flag = false;
+                reverse(s, start, end);
+            }
+
+            if (i == s.size() - 1 && flag)
+            {
+                reverse(s,start,s.size()-1);
             }
         }
         return s;

@@ -98,4 +98,48 @@ public:
         }
         return result;
     }
+
+    vector<vector<int>> fourSum3(vector<int> &nums, int target)
+    {
+        vector<vector<int>> result;
+        int len = nums.size();
+        sort(nums.begin(), nums.end());
+        for (int i = 0; i < len; i++)
+        {
+            // 第一个数去重
+            if (i > 0 && nums[i] == nums[i - 1])
+                continue;
+
+            for (int j = i + 1; j < len; j++)
+            {
+
+                // 第二个元素去重
+                if (j > i + 1 && nums[j] == nums[j - 1])
+                    continue;
+
+                int left = j + 1;
+                int right = len - 1;
+                int nextTarget = target - nums[i] - nums[j];
+
+                while (left < right)
+                {
+                    if (nextTarget > nums[left] + nums[right])
+                        left++;
+                    else if (nextTarget < nums[left] + nums[right])
+                        right--;
+                    else
+                    {
+                        result.push_back({nums[i], nums[j], nums[left], nums[right]});
+                        while (right > left && nums[left] == nums[left + 1])
+                            left++;
+                        while (right > left && nums[right] == nums[right - 1])
+                            right--;
+                        left++;
+                        right--;
+                    }
+                }
+            }
+        }
+        return result;
+    }
 };

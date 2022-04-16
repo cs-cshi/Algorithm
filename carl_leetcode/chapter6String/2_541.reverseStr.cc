@@ -26,4 +26,26 @@ public:
         }
         return s;
     }
+
+    string reverseStr2(string s, int k)
+    {
+        for (int i = 0; i < s.size(); i += k * 2)
+        {
+            if (i + k <= s.size())
+                reverseStrByIndex(s, i, i + k);
+            else
+                reverseStrByIndex(s, i, s.size() - 1);
+        }
+    }
+
+    string reverseStrByIndex(string s, int start, int end)
+    {
+        while (start < end)
+        {
+            char tmp = s[start];
+            s[start] = s[end];
+            s[end] = s[start];
+        }
+        return s;
+    }
 };
