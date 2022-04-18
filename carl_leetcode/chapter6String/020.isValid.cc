@@ -65,6 +65,11 @@ public:
             return true;
     }
 
+    /**
+     * 1. 栈存储正确匹配的右括号
+     * 2. 遍历 s 时遇到右括号，如果与栈顶不匹配（包含栈空），说明之前匹配出错
+     * 3. 如果能匹配上，说明当前左右括号正确匹配，弹出
+     * */
     bool isValid(string s)
     {
         stack<char> stack;

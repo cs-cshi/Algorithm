@@ -42,7 +42,7 @@ public:
                 else
                     stack.emplace(nums2 / nums1);
             }
-            else
+            else    
                 stack.emplace(stoi(tokens[i]));
         }
         return int(stack.top());

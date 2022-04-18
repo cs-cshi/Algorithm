@@ -10,7 +10,6 @@
 using std::deque;
 using std::vector;
 
-
 class Solution
 {
 public:
@@ -18,23 +17,23 @@ public:
     {
         MyQueue que;
         vector<int> result;
-        for (int i = 0; i < k; i++)             // 先将前 k 个元素加入队列
+        for (int i = 0; i < k; i++) // 先将前 k 个元素加入队列
             que.push(nums[i]);
-        result.push_back(que.front());          // 初始化窗口中的最大值
+        result.push_back(que.front()); // 初始化窗口中的最大值
         for (int i = k; i < nums.size(); i++)
         {
-            que.pop(nums[i-k]);                 // 滑动窗口移动删除左侧元素
-            que.push(nums[i]);                  // 滑动窗口移动添加右侧新元素
-            result.push_back(que.front());      // 当前滑动窗口中的最大值
+            que.pop(nums[i - k]);          // 滑动窗口移动删除左侧元素
+            que.push(nums[i]);             // 滑动窗口移动添加右侧新元素
+            result.push_back(que.front()); // 当前滑动窗口中的最大值
         }
         return result;
     }
 
 private:
     /**
-    * 维护一个可能成为滑动窗口中最大值的元素的队列
-    * 注意队列不存储滑动窗口所有的值
-    */
+     * 维护一个可能成为滑动窗口中最大值的元素的队列
+     * 注意队列不存储滑动窗口所有的值
+     */
     class MyQueue
     {
     public:
@@ -64,8 +63,9 @@ private:
     };
 };
 
-int main(){
-    vector<int> nums = {1,3,1,2,0,5};
+int main()
+{
+    vector<int> nums = {1, 3, 1, 2, 0, 5};
     Solution solution;
     solution.maxSlidingWindow(nums, 3);
 }

@@ -49,45 +49,38 @@ public:
         }
         return -1;
     }
-};
 
-class Solution2
-{
-public:
-    void getNext(int *next, const string &s)
+    // 使用原始前缀码
+    void getNext2(int *next, const string &s)
     {
         int j = 0;
         next[0] = j;
+
         for (int i = 1; i < s.size(); i++)
         {
-            while (j >= 1 && s[i] != s[j])
+            while (j > 0 && s[i] != s[j])
                 j = next[j - 1];
 
             if (s[i] == s[j])
                 j++;
-
             next[i] = j;
         }
     }
 
-    int strStr(string haystack, string needle)
+    int strStr2(string haystack, string needle)
     {
-        if (needle.size() == 0)
-            return 0;
-
         int next[needle.size()];
-        getNext(next, needle);
-        int j = 0;
-        for (int i = 0; i < haystack.size(); i++)
+        getNext2(next, needle);
+        for (int i = 0, j = 0; i < haystack.size() && j < needle.size(); i++)
         {
-            while (j >= 1 && (haystack[i] != needle[j]))
+            while (j > 0 && haystack[i] != needle[j])
                 j = next[j - 1];
 
             if (haystack[i] == needle[j])
                 j++;
 
             if (j == needle.size())
-                return (i - needle.size() + 1);
+                return i - j + 1;
         }
         return -1;
     }
