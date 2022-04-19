@@ -41,7 +41,7 @@ public:
 
         if (last_j == 0)
             return "";
-        
-        return ans.substr(0,last_j);
+
+        return ans.substr(0, last_j);
     }
 };
