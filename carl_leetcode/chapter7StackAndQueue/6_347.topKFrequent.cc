@@ -18,18 +18,18 @@ class Solution
 public:
     vector<int> topKFrequent(vector<int> &nums, int k)
     {
-        unordered_map<int, int> map;            // 统计 nums 中每个字符出现次数
+        unordered_map<int, int> map; // 统计 nums 中每个字符出现次数
         for (int i = 0; i < nums.size(); i++)
             map[nums[i]]++;
-        priority_queue<pair<int, int>, vector<pair<int, int>>, mycomparison> pri_que;       // 小根堆，按出现频次排序
+        priority_queue<pair<int, int>, vector<pair<int, int>>, mycomparison> pri_que; // 小根堆，按出现频次排序
         for (pair<int, int> iter : map)
             pri_que.push(iter);
-        
-        while(pri_que.size()>k)     // 保证小根堆留下前 k 大的元素
+
+        while (pri_que.size() > k) // 保证小根堆留下前 k 大的元素
             pri_que.pop();
-        
+
         vector<int> result(k);
-        for(int i = k-1; i>= 0; i--)
+        for (int i = k - 1; i >= 0; i--)
         {
             result[i] = pri_que.top().first;
             pri_que.pop();
@@ -47,3 +47,18 @@ private:
         }
     };
 };
+
+vector<int> topKFrequent(vector<int> &nums, int k)
+{
+    unordered_map<int, int> umap;
+    vector<int> ans;
+    for (int i = 0; i < nums.size(); i++)
+        umap[nums[i++]]++;
+
+    for (const pair<int, int> iter : umap)
+    {
+        if(iter.second >= k)
+            ans.push_back(iter.first);
+    }
+    return ans;
+}

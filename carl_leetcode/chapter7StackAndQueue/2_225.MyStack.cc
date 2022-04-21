@@ -5,6 +5,9 @@ using std::cout;
 using std::endl;
 using std::queue;
 
+/**
+ * 使用两个单向队列模拟栈
+ */
 class MyStack
 {
 public:
@@ -57,9 +60,60 @@ private:
     queue<int> *queue2;
 };
 
+/**
+ * 使用一个单向队列模拟战
+ */
+class MyStack2
+{
+public:
+    MyStack2()
+    {
+        que = new queue<int>();
+    }
+
+    ~MyStack2()
+    {
+        delete que;
+    }
+
+    void push(int val)
+    {
+        que->push(val);
+    }
+
+    int top()
+    {
+        int result = this->pop();
+        que->push(result);
+        return result;
+    }
+
+    int pop()
+    {
+        int count = que->size();
+        count--;
+        while (count--)
+        {
+            que->push(que->front());
+            que->pop();
+        }
+        int result = que->front();
+        que->pop();
+        return result;
+    }
+
+    bool empty() const
+    {
+        return que->empty();
+    }
+
+private:
+    queue<int> *que;
+};
+
 int main()
 {
-    MyStack *mystack = new MyStack();
+    MyStack2 *mystack = new MyStack2();
     mystack->push(1);
     mystack->push(2);
     int top1 = mystack->top();
