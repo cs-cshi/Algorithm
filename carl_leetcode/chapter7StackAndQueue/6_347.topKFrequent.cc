@@ -21,7 +21,11 @@ public:
         unordered_map<int, int> map; // 统计 nums 中每个字符出现次数
         for (int i = 0; i < nums.size(); i++)
             map[nums[i]]++;
+
+        // 默认是 大根堆，即 priority_queue<int, vector<int>, less<int>>，从大到小插入数据
+        // 小根堆：priority_queue<int, vector<int>, greater<int>>，从小到大插入数据
         priority_queue<pair<int, int>, vector<pair<int, int>>, mycomparison> pri_que; // 小根堆，按出现频次排序
+
         for (pair<int, int> iter : map)
             pri_que.push(iter);
 
@@ -47,18 +51,3 @@ private:
         }
     };
 };
-
-vector<int> topKFrequent(vector<int> &nums, int k)
-{
-    unordered_map<int, int> umap;
-    vector<int> ans;
-    for (int i = 0; i < nums.size(); i++)
-        umap[nums[i++]]++;
-
-    for (const pair<int, int> iter : umap)
-    {
-        if(iter.second >= k)
-            ans.push_back(iter.first);
-    }
-    return ans;
-}
