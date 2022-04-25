@@ -7,6 +7,7 @@
 
 #include <vector>
 #include <queue>
+#include <algorithm>
 
 using namespace std;
 
@@ -15,6 +16,7 @@ class Solution
 public:
     vector<int> GetLeastNumbers_Solution(vector<int> input, int k)
     {
+        sort(input.begin(), input.end());
         priority_queue<int, vector<int>, less<int>> pri_que;
         for (int i = 0; i < input.size(); i++)
             pri_que.push(input[i]);

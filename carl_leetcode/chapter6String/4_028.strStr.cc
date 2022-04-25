@@ -33,6 +33,8 @@ public:
     {
         if (needle.size() == 0)
             return 0;
+        
+        // 
         int next[needle.size()];
         getNext(next, needle);
         int j = -1;
