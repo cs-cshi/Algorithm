@@ -85,6 +85,7 @@ vector<TreeNode *> deleteLevelOrder(TreeNode *root, vector<int> deleteLevels)
         if (isDeleteLevel) // 当前层删除
             i++;
 
+        // 已删除所有需要删除的层
         if (i >= deleteLevels.size())
             break;
         isDeleteLevelFarther = false;

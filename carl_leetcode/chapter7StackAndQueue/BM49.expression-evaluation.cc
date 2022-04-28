@@ -35,7 +35,7 @@ public:
         {
             if (s[i] >= '0' && s[i] <= '9')
             {
-                num += num * 10 + s[i] - '0';
+                num = num * 10 + s[i] - '0';
                 if (i == s.size() - 1)
                     que.push(to_string(num));
                 flag = true;
@@ -102,6 +102,7 @@ public:
             stk1.pop();
         }
 
+        // 后序表达式求值
         int ans = 0, num1 = 0, num2 = 0;
         while (!que.empty())
         {
@@ -138,7 +139,7 @@ public:
 int main()
 {
     Solution solution;
-    string s = "(2*(3-4))*5";
+    string s = "100+100";
     solution.solve(s);
 }
 
