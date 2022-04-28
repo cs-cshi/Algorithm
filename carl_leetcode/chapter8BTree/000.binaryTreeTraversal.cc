@@ -3,11 +3,13 @@
 #include <stack>
 #include <algorithm>
 #include <queue>
+#include <string>
 
-using std::queue;
-using std::reverse;
-using std::stack;
-using std::vector;
+// using std::queue;
+// using std::reverse;
+// using std::stack;
+// using std::vector;
+using namespace std;
 
 // struct TreeNode
 // {
