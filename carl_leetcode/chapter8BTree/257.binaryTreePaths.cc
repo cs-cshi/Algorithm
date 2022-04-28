@@ -7,34 +7,24 @@
 #include <string>
 #include <stack>
 
-using std::stack;
-using std::string;
-using std::vector;
+using namespace std;
+// using std::stack;
+// using std::string;
+// using std::vector;
 
 class Solution
 {
 public:
-    // Definition for a binary tree node.
-    // struct TreeNode
-    // {
-    //     int val;
-    //     TreeNode *left;
-    //     TreeNode *right;
-    //     TreeNode() : val(0), left(nullptr), right(nullptr) {}
-    //     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
-    //     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
-    // };
-
     vector<string> binaryTreePaths(TreeNode *root)
     {
         vector<string> result;
         vector<int> path;
-        traversal(root, path, result);
+        backtracking(root, path, result);
         return result;
     }
 
-    // 先序、中序、后序本质上是深度优先遍历，参数 path 的增加弹出体现了回溯的过程
-    void traversal(TreeNode *cur, vector<int> &path, vector<string> &result)
+    // 先序、中序、后序本质上是 dfs ，参数 path 的增加弹出体现了回溯的过程
+    void backtracking(TreeNode *cur, vector<int> &path, vector<string> &result)
     {
         path.push_back(cur->val);      // 中
         if (!cur->left && !cur->right) // 叶子节点
@@ -42,23 +32,23 @@ public:
             string pathStr;
             for (int i = 0; i < path.size() - 1; i++)
             {
-                pathStr += std::to_string(path[i]);
+                pathStr += to_string(path[i]);
                 pathStr += "->";
             }
-            pathStr += std::to_string(path[path.size() - 1]);
+            pathStr += to_string(path[path.size() - 1]);
             result.emplace_back(pathStr);
             return;
         }
 
         if (cur->left) // 左
         {
-            traversal(cur->left, path, result);
+            backtracking(cur->left, path, result);
             path.pop_back();
         }
 
         if (cur->right) // 右
         {
-            traversal(cur->right, path, result);
+            backtracking(cur->right, path, result);
             path.pop_back();
         }
     }
@@ -66,7 +56,7 @@ public:
     // path 使用 string 类型代替 vector<int> 类型，减少 vector 的 pop 过程，但实际上每次递归时都会新建一个新的 string 对象，内存上可能会增加
     void traversal2(TreeNode *cur, string path, vector<string> &result)
     {
-        path += std::to_string(cur->val);
+        path += to_string(cur->val);
         if (cur->left == nullptr && cur->right == nullptr)
         {
             result.emplace_back(path);
@@ -84,29 +74,32 @@ public:
         stack<TreeNode *> treeStk;
         stack<string> pathStk;
         vector<string> result;
+
         if (root == nullptr)
             return result;
+            
         treeStk.emplace(root);
-        pathStk.emplace(std::to_string(root->val));
+        pathStk.emplace(to_string(root->val));
         while (!treeStk.empty())
         {
             TreeNode *node = treeStk.top();
             treeStk.pop();
-            string path = pathStk.top();        // path 表示当前路径
+            string path = pathStk.top(); // path 表示当前路径
             pathStk.pop();
+            
             if (node->left == nullptr && node->right == nullptr)
                 result.emplace_back(path);
 
             if (node->left)
             {
                 treeStk.emplace(node->left);
-                pathStk.emplace(path + "->" + std::to_string(node->left->val));
+                pathStk.emplace(path + "->" + to_string(node->left->val));
             }
 
             if (node->right)
             {
                 treeStk.emplace(node->right);
-                pathStk.emplace(path + "->" + std::to_string(node->right->val));
+                pathStk.emplace(path + "->" + to_string(node->right->val));
             }
         }
         return result;

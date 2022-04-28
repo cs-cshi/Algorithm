@@ -4,24 +4,16 @@
  */
 #include "treeNode.hh"
 #include <iostream>
+#include <stack>
+#include <utility>
 
-using std::cout;
-using std::endl;
+using namespace std;
+// using std::cout;
+// using std::endl;
 
 class Solution
 {
 public:
-    // Definition for a binary tree node.
-    // struct TreeNode
-    // {
-    //     int val;
-    //     TreeNode *left;
-    //     TreeNode *right;
-    //     TreeNode() : val(0), left(nullptr), right(nullptr) {}
-    //     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
-    //     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
-    // };
-
     bool hasPathSum(TreeNode *root, int targetSum)
     {
         if (root == nullptr)
@@ -30,6 +22,8 @@ public:
         if (traversal(root, targetSum))
             return true;
         return false;
+
+        // return backtracking(root, root->val, targetSum);
     }
 
     bool traversal(TreeNode *root, int count)
@@ -44,8 +38,8 @@ public:
 
         if (root->left)
         {
-            count -= root->left->val;           // target 目标增减放在进入子树逻辑处理前，方便回溯
-            if (traversal(root->left, count))   
+            count -= root->left->val; // target 目标增减放在进入子树逻辑处理前，方便回溯
+            if (traversal(root->left, count))
                 return true;
             count += root->left->val;
         }
@@ -60,18 +54,81 @@ public:
 
         return false;
     }
-};
 
-int main()
-{
-    Solution solution;
-    TreeNode *node = new TreeNode(0);
-    TreeNode *node1 = new TreeNode(1);
-    TreeNode *node2 = new TreeNode(1);
-    node->left = node1;
-    node->right = node2;
-    if (solution.hasPathSum(node, 0))
-        cout << "true" << endl;
-    else
-        cout << "false" << endl;
-}
+    bool backtracking(TreeNode *cur, int curSum, int target)
+    {
+        if (!cur->left && !cur->right)
+        {
+            if (curSum == target)
+                return true;
+            else
+                return false;
+        }
+
+        if (cur->left && backtracking(cur->left, curSum + cur->left->val, target))
+            return true;
+
+        if (cur->right && backtracking(cur->right, curSum + cur->right->val, target))
+            return true;
+
+        return false;
+    }
+
+    // 迭代实现，先序遍历，本质上出了需要对 node 用 stack 实现遍历外，还需要使用存储当前 sum 的 stack
+    bool hasPathSumByIteration(TreeNode *root, int targetSum)
+    {
+        if (!root)
+            return false;
+
+        stack<TreeNode *> stk1;
+        stack<int> stk2;
+        stk1.push(root);
+        stk2.push(root->val);
+        while (!stk1.empty())
+        {
+            TreeNode *node = stk1.top();
+            stk1.pop();
+            int curSum = stk2.top();
+            stk2.pop();
+            if (!node->left && !node->right && targetSum == curSum)
+                return true;
+
+            if (node->right)
+            {
+                stk1.push(node->right);
+                stk2.push(curSum + node->right->val);
+            }
+
+            if (node->left)
+            {
+                stk1.push(node->left);
+                stk2.push(curSum + node->left->val);
+            }
+        }
+        return false;
+    }
+
+    // 利用 pair<TreeNode *,int>，一个栈实现
+    bool hasPathSumByIteration2(TreeNode *root, int targetSum)
+    {
+        if (!root)
+            return false;
+
+        stack<pair<TreeNode *, int>> stk;
+        stk.push({root, root->val});
+        while (!stk.empty())
+        {
+            pair<TreeNode *, int> cur_pair = stk.top();
+            stk.pop();
+            TreeNode *cur_node = cur_pair.first;
+            if (!cur_node->left && !cur_node->right && cur_pair.second == targetSum)
+                return true;
+            if (cur_node->left)
+                stk.push({cur_node->left, cur_pair.second + cur_node->left->val});
+
+            if (cur_node->right)
+                stk.push({cur_node->right, cur_pair.second + cur_node->right->val});
+        }
+        return false;
+    }
+};

@@ -6,9 +6,9 @@
 #include "treeNode.hh"
 #include <algorithm>
 #include <stack>
+#include <queue>
 
-using std::stack;
-using std::swap;
+using namespace std;
 
 class Solution
 {
@@ -26,6 +26,12 @@ public:
 
     TreeNode *invertTree(TreeNode *root)
     {
+        return invertTreePreorderTraversalByRecursion(root);
+    }
+
+    // 先序遍历递归
+    TreeNode *invertTreePreorderTraversalByRecursion(TreeNode *root)
+    {
         if (root == nullptr)
             return root;
         swap(root->left, root->right);
@@ -34,7 +40,8 @@ public:
         return root;
     }
 
-    TreeNode *invertTree2(TreeNode *root)
+    // 先序遍历迭代
+    TreeNode *invertTreePreorderTraversalByIteration(TreeNode *root)
     {
         stack<TreeNode *> stk;
         if (root == nullptr)
@@ -49,6 +56,29 @@ public:
                 stk.push(node->left);
             if (node->right)
                 stk.push(node->right);
+        }
+        return root;
+    }
+
+    TreeNode *levelOrder(TreeNode *root)
+    {
+        queue<TreeNode *> que;
+        if (!root)
+            return root;
+        que.push(root);
+        while (!que.empty())
+        {
+            int levelSize = que.size();
+            while (levelSize--)
+            {
+                TreeNode *node = que.front();
+                que.pop();
+                swap(node->left, node->right);
+                if(node->left)
+                    que.push(node->left);
+                if(node->right)
+                    que.push(node->right);
+            }
         }
         return root;
     }
