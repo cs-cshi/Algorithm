@@ -12,58 +12,48 @@ using std::unordered_map;
 class Solution
 {
 public:
-    // Definition for a binary tree node.
-    // struct TreeNode
-    // {
-    //     int val;
-    //     TreeNode *left;
-    //     TreeNode *right;
-    //     TreeNode() : val(0), left(nullptr), right(nullptr) {}
-    //     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
-    //     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
-    // };
-
-    TreeNode *buildTree(vector<int> &preorder, vector<int> &inorder)
-    {
-        if (preorder.size() == 0 || inorder.size() == 0)
+    TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
+        if(preorder.size() == 0 || inorder.size() == 0)
             return nullptr;
-
-        return traversal(preorder, 0, preorder.size(), inorder, 0, inorder.size());
+        return traversal(preorder, 0 ,preorder.size(),inorder,0, inorder.size());
     }
 
     TreeNode *traversal(vector<int> &preorder, int preorderBegin, int preorderEnd, vector<int> &inorder, int inorderBegin, int inorderEnd)
     {
-        if (preorderBegin == preorderEnd)
+        // [)
+        // 1. 构建根结点，返回根结点为叶子结点情况
+        if(preorderEnd - preorderBegin == 0)
             return nullptr;
 
-        int rootValue = preorder[preorderBegin];
-        TreeNode *node = new TreeNode(rootValue);
+        int root_value = preorder[preorderBegin];
+        TreeNode *root = new TreeNode(root_value);
+        if(preorderEnd - preorderBegin == 1)
+            return root;
 
-        if (preorderEnd - preorderBegin == 1)
-            return node;
-
-        int delimiterIndex = inorderBegin;
-        for (; delimiterIndex <= inorderEnd; delimiterIndex++)
-        {
-            if (rootValue == inorder[delimiterIndex])
+        // 2. 根据中序遍历找到中序遍历分割点
+        int delimiterIndex = 0;
+        for(delimiterIndex = inorderBegin; delimiterIndex<inorderEnd;delimiterIndex++)
+            if(inorder[delimiterIndex]== root_value)
                 break;
-        }
 
-        // 切割中序遍历
+        // 3. 分割中序遍历
         int leftInorderBegin = inorderBegin;
         int leftInorderEnd = delimiterIndex;
-        int rightInorderBegin = delimiterIndex + 1;
+        int rightInorderBegin = delimiterIndex+1;
         int rightInorderEnd = inorderEnd;
 
-        // 切割先序遍历
+        // 4. 分割前序遍历
         int leftPreorderBegin = preorderBegin + 1;
-        int leftPreorderEnd = preorderBegin + delimiterIndex - inorderBegin + 1;
+        int leftPreorderEnd = leftPreorderBegin + leftInorderEnd - leftInorderBegin;
         int rightPreorderBegin = leftPreorderEnd;
         int rightPreorderEnd = preorderEnd;
 
-        node->left = traversal(preorder, leftPreorderBegin, leftPreorderEnd, inorder, leftInorderBegin, leftInorderEnd);
-        node->right = traversal(preorder, rightPreorderBegin, rightPreorderEnd, inorder, rightInorderBegin, rightInorderEnd);
-        return node;
+        // 5. 构建左右子树
+        root->left = traversal(preorder, leftPreorderBegin, leftPreorderEnd, inorder, leftInorderBegin, leftInorderEnd);
+        root->right = traversal(preorder, rightPreorderBegin, rightPreorderEnd, inorder, rightInorderBegin, rightInorderEnd);
+
+        // 6. 返回根
+        return root;
     }
 
     TreeNode *buildTreeHelper(vector<int> &preorder, vector<int> &inorder, int preorder_left, int preorder_right, int inorder_left, int inorder_right, unordered_map<int, int> &map)

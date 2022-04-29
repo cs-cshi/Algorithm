@@ -11,17 +11,6 @@ using std::queue;
 class Solution
 {
 public:
-    // Definition for a binary tree node.
-    // struct TreeNode
-    // {
-    //     int val;
-    //     TreeNode *left;
-    //     TreeNode *right;
-    //     TreeNode() : val(0), left(nullptr), right(nullptr) {}
-    //     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
-    //     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
-    // };
-
     TreeNode *mergeTrees(TreeNode *root1, TreeNode *root2)
     {
         return traversal(root1, root2);
@@ -39,7 +28,7 @@ public:
         return root;
     }
 
-    TreeNode *mergeTreesByLevelTracersal(TreeNode *root1, TreeNode *root2)
+    TreeNode *mergeTreesByLevelTraversal(TreeNode *root1, TreeNode *root2)
     {
         if (root1 == nullptr)
             return root2;
@@ -78,6 +67,6 @@ public:
             if (node1->right == nullptr && node2->right != nullptr)
                 node1->right = node2->right;
         }
-        return root1;
+        return root1;   
     }
 };

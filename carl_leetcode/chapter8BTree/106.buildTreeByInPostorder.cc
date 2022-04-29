@@ -10,17 +10,14 @@ using std::vector;
 class Solution
 {
 public:
-    // Definition for a binary tree node.
-    // struct TreeNode
-    // {
-    //     int val;
-    //     TreeNode *left;
-    //     TreeNode *right;
-    //     TreeNode() : val(0), left(nullptr), right(nullptr) {}
-    //     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
-    //     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
-    // };
-
+    /**
+     * 1. 找到根结点，返回为叶子结点情况
+     * 2. 找到中序遍历分割点
+     * 3. 分割中序遍历为左右子树
+     * 4. 分割后序遍历为左右子树
+     * 5. 构建左右孩子
+     * 6. 返回根
+    */
     TreeNode *buildTree(vector<int> &inorder, vector<int> &postorder)
     {
         if (inorder.size() == 0 || postorder.size() == 0)

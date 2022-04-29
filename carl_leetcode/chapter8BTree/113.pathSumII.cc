@@ -10,17 +10,6 @@ using std::vector;
 class Solution
 {
 public:
-    // Definition for a binary tree node.
-    // struct TreeNode
-    // {
-    //     int val;
-    //     TreeNode *left;
-    //     TreeNode *right;
-    //     TreeNode() : val(0), left(nullptr), right(nullptr) {}
-    //     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
-    //     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
-    // };
-
     vector<vector<int>> pathSum(TreeNode *root, int targetSum)
     {
         vector<int> path;
@@ -31,25 +20,25 @@ public:
         return result;
     }
 
-    void getPath(TreeNode *root, int count, vector<int> &path, vector<vector<int>> &result)
+    void getPath(TreeNode *root, int curSum, vector<int> &path, vector<vector<int>> &result)
     {
         path.push_back(root->val);
         if (root->left == nullptr && root->right == nullptr)
         {
-            if (count == 0)
+            if (curSum == 0)    // 也可以用 curSum = targetSum 来计算，加一个参数
                 result.push_back(path);
             return;
         }
 
         if (root->left)
         {
-            getPath(root->left, count - root->left->val, path, result); // 也可以先 count -= root->left->val，递归后在回溯加回来，递归参数传 count
+            getPath(root->left, curSum - root->left->val, path, result); // 也可以先 curSum -= root->left->val，递归后在回溯加回来，递归参数传 curSum
             path.pop_back();
         }
 
         if (root->right)
         {
-            getPath(root->right, count - root->right->val, path, result);
+            getPath(root->right, curSum - root->right->val, path, result);
             path.pop_back();
         }
     }

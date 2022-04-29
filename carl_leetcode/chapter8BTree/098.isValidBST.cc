@@ -16,20 +16,10 @@ using std::stack;
 class Solution
 {
 public:
-    // struct TreeNode
-    // {
-    //     int val;
-    //     TreeNode *left;
-    //     TreeNode *right;
-    //     TreeNode() : val(0), left(nullptr), right(nullptr) {}
-    //     TreeNode(int val) : val(val), left(nullptr), right(nullptr) {}
-    //     TreeNode(int val, TreeNode *left, TreeNode *right) : val(val), left(left), right(right) {}
-    // };
-
     // 每个节点都有上界和下界
     bool isValidBST(TreeNode *root)
     {
-        long longMin = numeric_limits<long>::min();
+        long longMin = numeric_limits<long>::min();     // 如果值就是上下界，将会失效
         long longMax = numeric_limits<long>::max();
         return recursion(root, longMin, longMax);
     }
