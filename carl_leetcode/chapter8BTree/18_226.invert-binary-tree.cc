@@ -26,38 +26,37 @@ public:
 
     TreeNode *invertTree(TreeNode *root)
     {
-        return invertTreePreorderTraversalByRecursion(root);
-    }
-
-    // 先序遍历递归
-    TreeNode *invertTreePreorderTraversalByRecursion(TreeNode *root)
-    {
-        if (root == nullptr)
-            return root;
-        swap(root->left, root->right);
-        invertTree(root->left);
-        invertTree(root->right);
+        invertTreePreorderTraversalByRecursion(root);
         return root;
     }
 
+    // 先序遍历递归
+    void invertTreePreorderTraversalByRecursion(TreeNode *root)
+    {
+        if (root == nullptr)
+            return;
+        swap(root->left, root->right);
+        invertTree(root->left);
+        invertTree(root->right);
+    }
+
     // 先序遍历迭代
-    TreeNode *invertTreePreorderTraversalByIteration(TreeNode *root)
+    void invertTreePreorderTraversalByIteration(TreeNode *root)
     {
         stack<TreeNode *> stk;
         if (root == nullptr)
-            return root;
+            return;
         stk.push(root);
         while (!stk.empty())
         {
             TreeNode *node = stk.top();
             stk.pop();
             swap(node->left, node->right);
-            if (node->left)
-                stk.push(node->left);
             if (node->right)
                 stk.push(node->right);
+            if (node->left)
+                stk.push(node->left);
         }
-        return root;
     }
 
     TreeNode *levelOrder(TreeNode *root)
@@ -74,9 +73,9 @@ public:
                 TreeNode *node = que.front();
                 que.pop();
                 swap(node->left, node->right);
-                if(node->left)
+                if (node->left)
                     que.push(node->left);
-                if(node->right)
+                if (node->right)
                     que.push(node->right);
             }
         }
