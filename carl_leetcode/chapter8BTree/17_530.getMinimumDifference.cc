@@ -12,7 +12,7 @@ class Solution {
 public:
     int getMinimumDifference(TreeNode* root) {
         TreeNode *prev = nullptr;
-        int ans = INT32_MAX;
+        int ans = INT_MAX;
         getMinimumDifferenceByRecursion(root, prev, ans);
         return ans;
     }
@@ -23,7 +23,7 @@ public:
         stack<TreeNode *> stk;
         TreeNode *cur = root;
         TreeNode *pre = nullptr;
-        int ans = INT32_MAX;
+        int ans = INT_MAX;
         while(!stk.empty() || cur )
         {
             if(cur)

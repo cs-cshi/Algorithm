@@ -37,6 +37,5 @@ int main()
 {
     Test *test = new Test(1);
     Test test2(2);
-    // wrap test3(test);
-    cout << "test begin ... " << endl;
+    wrap test3(test);
 }

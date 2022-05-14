@@ -17,7 +17,7 @@ public:
      * 4. 分割后序遍历为左右子树
      * 5. 构建左右孩子
      * 6. 返回根
-    */
+     */
     TreeNode *buildTree(vector<int> &inorder, vector<int> &postorder)
     {
         if (inorder.size() == 0 || postorder.size() == 0)
@@ -74,7 +74,7 @@ public:
         if (postorderBegin == postorderEnd)
             return nullptr;
 
-        int rootValue = postorder[postorderEnd-1];  //右边是开区间
+        int rootValue = postorder[postorderEnd - 1]; //右边是开区间
         TreeNode *node = new TreeNode(rootValue);
         postorderEnd--; // 后序遍历弹出根节点
 
@@ -104,6 +104,45 @@ public:
         node->right = traversal2(inorder, rightInorderBegin, rightInorderEnd, postorder, rightPostorderBegin, rightPostorderEnd);
 
         return node;
+    }
+
+    // [begin, end) 左闭右开
+    TreeNode *traversal(vector<int> &inorder, int inorderBegin, int inorderEnd, vector<int> &postorder, int postBegin, int postEnd)
+    {
+        // 退出条件
+        if (postBegin >= postEnd)
+            return nullptr;
+
+        // 构建根结点
+        int rootVal = postorder[postEnd - 1];
+        TreeNode *root = new TreeNode(rootVal);
+
+        if (postEnd - postBegin == 1)
+            return root;
+
+        // 中序遍历寻找根节点
+        int mid = inorderBegin; // 根结点索引
+        while (mid < inorder.size() && inorder[mid] != rootVal)
+            mid++;
+
+        // 中序分左右子数
+        int leftInorderBegin = inorderBegin;
+        int leftInorderEnd = mid;
+        int rightInorderBegin = mid + 1;
+        int rightInorderEnd = inorderEnd;
+
+        // 后序分左右子数
+        int leftPostorderBegin = postBegin;
+        int leftPostorderEnd = postBegin + mid - inorderBegin;  // 注意不需要 +1，mid 是开区间
+        int rightPostorderBegin = leftPostorderEnd;
+        int rightPostorderEnd = postEnd - 1;
+
+        // 构建根节点孩子结点
+        root->left = traversal(inorder, leftInorderBegin, leftInorderEnd, postorder, leftPostorderBegin, leftPostorderEnd);
+        root->right = traversal(inorder, rightInorderBegin, rightInorderEnd, postorder, rightPostorderBegin, rightPostorderEnd);
+
+        // 返回根节点
+        return root;
     }
 };
 
