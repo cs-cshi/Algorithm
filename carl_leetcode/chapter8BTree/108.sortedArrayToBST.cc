@@ -24,7 +24,7 @@ public:
     {
         if (left > right)
             return nullptr;
-        int mid = (right - left) >> 1 + left;
+        int mid = ((right - left) >> 1) + left;
         TreeNode *node = new TreeNode(nums[mid]);
         node->left = traversal(nums, left, mid - 1);
         node->right = traversal(nums, mid + 1, right);

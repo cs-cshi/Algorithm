@@ -15,6 +15,7 @@ public:
         if (root == nullptr)
             return nullptr;
 
+        // 寻找在 [low,high] 区间的根节点
         while (root != nullptr && (root->val < low || root->val > high))
         {
             if (root->val < low)
@@ -23,6 +24,7 @@ public:
                 root = root->left;
         }
 
+        // 左子树剪枝，剪去 < low 的子树
         TreeNode *cur = root;
         while (cur != nullptr)
         {
@@ -31,6 +33,7 @@ public:
             cur = cur->left;
         }
 
+        // 右子树剪枝，减去 > high 的子树
         cur = root;
         while (cur != nullptr)
         {
@@ -38,6 +41,7 @@ public:
                 cur->right = cur->right->left;
             cur = cur->right;
         }
+        
         return root;
     }
 };
