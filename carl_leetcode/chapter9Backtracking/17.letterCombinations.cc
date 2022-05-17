@@ -41,6 +41,25 @@ public:
         }
     }
 
+    void backtracking2(vector<string> &ans, string &path, int startIndex, const string &digits)
+    {
+        // cout << path << endl;
+        if (path.size() == digits.size())
+        {
+            ans.push_back(path);
+            return;
+        }
+
+        int index = digits[startIndex] - '0';
+        // cout << index << endl;
+        for (int i = 0; i < letterMap[index].size(); i++) // 横向从 0 开始
+        {
+            path.push_back(letterMap[index][i]);
+            backtracking2(ans, path, startIndex + 1, digits); // 纵向进入下一个串
+            path.pop_back();
+        }
+    }
+
 private:
     const string letterMap[10] = {
         "",     // 0
