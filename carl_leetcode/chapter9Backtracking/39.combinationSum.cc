@@ -27,8 +27,7 @@ public:
 
         if (sum == target)
         {
-            if (sum == target)
-                result.push_back(path);
+            result.push_back(path);
             return;
         }
         // for (int i = indexStart; i < candidates.size() && sum + candidates[i] <= target; i++)
@@ -38,7 +37,7 @@ public:
                 continue;
             sum += candidates[i];
             path.push_back(candidates[i]);
-            backtracking(result, path, sum, i, candidates, target); // 不需要 i+1，表示当前数值可以重复选取
+            backtracking(result, path, sum, i, candidates, target); // 不需要 i+1，表示当前数值可以重复选取, for 循环会横向 i++
             sum -= candidates[i];
             path.pop_back();
         }
