@@ -106,3 +106,7 @@ private:
     DLinkedNode *head;
     DLinkedNode *tail;
 };
+
+
+Line 58: Char 21: runtime error: member access within null pointer of type 'DLinkedNode' (solution.cpp)
+SUMMARY: UndefinedBehaviorSanitizer: undefined-behavior prog_joined.cpp:63:21
