@@ -37,7 +37,7 @@ public:
             // used[i]==true 当前位置已经使用，纵向，i 是从 0开始
             // nums[i - 1] == nums[i] && used[i - 1] == false  同层重复
             // nums[i - 1] == nums[i] && used[i - 1] == true  树枝重复
-            if ((i > 0 && nums[i - 1] == nums[i] && used[i - 1] == false) || used[i] == true)
+            if ((i > 0 && nums[i - 1] == nums[i] && used[i - 1] == false))       // 横向去重（每次从0开始） + 纵向去重
                 continue;
             used[i] = true;
             path.push_back(nums[i]);
