@@ -26,7 +26,7 @@ public:
         int nextDistance = 0;
         for (int i = 0; i < nums.size(); i++)
         {
-            nextDistance = max(nextDistance, nums[i] + i);
+            nextDistance = max(nextDistance, nums[i] + i);      // 这一跳中下一跳能到达的最远距离
             if (i == curDistance)
             {
                 ans++;

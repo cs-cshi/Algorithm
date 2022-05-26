@@ -19,14 +19,14 @@ public:
         sort(nums.begin(), nums.end());
         int i = 0;
 
-        // 将数组前 k 个负元素替换成正数
+        // 从小到大修改每一个负数
         while (i < nums.size() && nums[i] < 0 && k--)
         {
             nums[i] = -nums[i];
             i++;
         }
 
-        // 还需替换一个元素
+        // 负数全部修改完成，还需要修改 k 次
         if (k > 0 && k % 2 == 1)    
         {
             if (i == 0) // 全为正
