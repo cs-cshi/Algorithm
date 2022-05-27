@@ -7,6 +7,7 @@
 
 #include <vector>
 #include <algorithm>
+#include <list>
 
 using namespace std;
 
@@ -22,13 +23,27 @@ public:
     {
         // sort(people.begin(), people.end(), compare);
         sort(people.begin(), people.end(), compare2);
+        vector<vector<int>> que;
         for (int i = 0; i < people.size(); i++)
         {
-            vector<int> tmp = people[i];
-            people.erase(people.begin() + i);
-            people.insert(people.begin() + people[i][1], people[i]);
+            que.insert(que.begin() + people[i][1], people[i]);
         }
-        return people;
+        return que;
+    }
+
+    // 将底层容器有 vector 改为 list, vector 存在不断扩容拷贝，然后移动的开销
+    vector<vector<int>> reconstructQueue(vector<vector<int>> &people)
+    {
+        sort(people.begin(), people.end(), compare2);
+        list<vector<int>> que;
+        for(int i = 0; i < people.size(); i++) {
+            int position = people[i][1];
+            list<vector<int>>::iterator it = que.begin();
+            while(position--)
+                it++;
+            que.insert(it, people[i]);
+        }
+        return vector<vector<int>>(que.begin(), que.end());
     }
 
 private:
