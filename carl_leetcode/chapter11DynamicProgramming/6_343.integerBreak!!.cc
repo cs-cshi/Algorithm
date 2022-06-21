@@ -25,7 +25,7 @@ public:
         vector<int> dp(n + 1);
         dp[2] = 1;
         for (int i = 3; i <= n; i++)
-            for (int j = 1; j < i - 1; j++)
+            for (int j = 1; j < i / 2; j++)
                 dp[i] = max(dp[i], max((i - j) * j, dp[i - j] * j)); // dp[i]，从当前 j(1~i-1) 中选择最大的 dp[i]
 
         return dp[n];
