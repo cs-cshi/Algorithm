@@ -26,18 +26,10 @@ public:
         dp[0] = 1;
         for (int i = 1; i <= n; i++)
         {
+            // 相当于，树根节点，左边 j - 1 个节点，右边 i-j 个节点数目相加
             for (int j = 1; j <= i; j++)
-            {
                 dp[i] += dp[j - 1] * dp[i - j];
-                cout << dp[i] << " = " << dp[j - 1] << " * " << dp[i - j] << endl;
-            }
         }
         return dp[n];
     }
 };
-
-int main()
-{
-    Solution solution;
-    solution.numTrees(3);
-}
