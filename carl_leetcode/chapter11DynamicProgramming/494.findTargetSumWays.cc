@@ -30,15 +30,15 @@ public:
         if (abs(target) > sum || (sum + target) % 2 == 1)
             return 0;
 
-        int plusTarget = (sum + target) / 2;
-        vector<int> dp(plusTarget + 1, 0); // dp[i]，和为 i 有 dp[i] 种方法
+        int bagWeight = (sum + target) / 2;
+        vector<int> dp(bagWeight + 1, 0); // dp[i]，和为 i 有 dp[i] 种方法
         // dp[j] += dp[j-nums[i]]
         dp[0] = 1;
 
         for (int i = 0; i < nums.size(); i++)
-            for (int j = plusTarget; j >= nums[i]; j--)
-                dp[j] += dp[j - nums[i]];
-        return dp[plusTarget];
+            for (int j = bagWeight; j >= nums[i]; j--)
+                dp[j] += dp[j - nums[i]];       // 一开始的 dp[j] 都是无效计算，后续前面填充了才有效
+        return dp[bagWeight];
     }
 
     int findTargetSumWays(vector<int> &nums, int target)

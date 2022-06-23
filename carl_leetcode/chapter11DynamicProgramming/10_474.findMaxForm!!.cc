@@ -22,8 +22,9 @@ class Solution
 public:
     int findMaxForm(vector<string> &strs, int m, int n)
     {
+        // dp[i][j] ：i 个 0 j 个 1 时最大子集长度
         vector<vector<int>> dp(m + 1, vector<int>(n + 1, 0));
-        for (auto str : strs)
+        for (auto str : strs) // 遍历物品
         {
             int zeroNum = 0;
             int oneNum = 0;
@@ -35,7 +36,7 @@ public:
                     oneNum++;
             }
 
-            for (int i = m; i >= zeroNum; i--)
+            for (int i = m; i >= zeroNum; i--) // 背包遍历
             {
                 for (int j = n; j >= oneNum; j--)
                     dp[i][j] = max(dp[i][j], dp[i - zeroNum][j - oneNum] + 1);
