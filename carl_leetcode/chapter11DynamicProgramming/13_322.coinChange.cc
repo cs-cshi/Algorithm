@@ -24,8 +24,9 @@ public:
         for (int i = 0; i < coins.size(); i++)
         {
             for (int j = coins[i]; j <= amount; j++)
-                dp[j] = min(dp[j], dp[j - coins[i]] + 1);
+                if (dp[j - coins[i]] != INT_MAX)
+                    dp[j] = min(dp[j], dp[j - coins[i]] + 1);
         }
-        return dp[amount];
+        return dp[amount] == INT_MAX ? -1 : dp[amount];
     }
 };
