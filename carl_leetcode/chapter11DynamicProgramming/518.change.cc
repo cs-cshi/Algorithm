@@ -18,7 +18,7 @@ public:
     {
         // dp[j] 凑成总金额 j 的硬币组合数
         // dp[j] += dp[j-coins[i]]
-        // dp[0] = 1
+        // dp[0] = 1    // 初始化
         // 遍历顺序：先物品再背包
         vector<int> dp(amount + 1, 0);
         dp[0] = 1;
