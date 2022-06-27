@@ -21,9 +21,8 @@ public:
             return 0;
         vector<vector<int>> dp(2, vector<int>(2 * k + 1));
         dp[0][0] = 0;
-        for (int i = 1; i <= 2 * k; i++)
-            if (i % 2 == 1)
-                dp[0][i] = -prices[0];
+        for (int i = 1; i <= 2 * k; i += 2)
+            dp[0][i] = -prices[0];
         for (int i = 1; i < prices.size(); i++)
         {
             for (int j = 1; j <= 2 * k; j++)
