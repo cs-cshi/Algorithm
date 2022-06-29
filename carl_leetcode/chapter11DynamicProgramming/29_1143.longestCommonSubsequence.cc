@@ -21,7 +21,7 @@ public:
     int longestCommonSubsequence(string text1, string text2)
     {
         /**
-         * dp[i][j] 长度为[0,i-1]和长度为[0,j-1] 中的最长公共子序列
+         * dp[i][j] 长度为[0, i-1]和长度为[0, j-1] 中的最长公共子序列
          */
         vector<vector<int>> dp(text1.size() + 1, vector<int>(text2.size() + 1, 0));
         for (int i = 1; i <= text1.size(); i++)

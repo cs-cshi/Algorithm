@@ -18,6 +18,28 @@ class Solution
 public:
     int maxProfit(vector<int> &prices)
     {
+        // 买入 dp[i][0] = max(dp[i][0], dp[i][2] - prices[i])
+        // 卖出 dp[i][1] = max(dp[i][1], dp[i-1][0] + prices[i])
+        // 冷冻期 dp[i][2] =  max(dp[i][2], dp[i][1])
+        if (prices.size() <= 1)
+            return 0;
+        vector<vector<int>> dp(2, vector<int>(3, 0));
+        dp[0][0] = -prices[0];
+
+        for (int i = 0; i < prices.size(); i++)
+        {
+            dp[1][0] = max(dp[0][0], dp[0][2] - prices[i]);
+            dp[1][1] = max(dp[0][1], dp[0][0] + prices[i]);
+            dp[1][2] = max(dp[0][2], dp[0][1]);
+            dp[0][0] = dp[1][0];
+            dp[0][1] = dp[1][1];
+            dp[0][2] = dp[1][2];
+        }
+        return dp[1][1];
+    }
+
+    int maxProfit2(vector<int> &prices)
+    {
         /**
          * 1. dp[i][j]，第 i 天状态为j，所剩最多现金为 dp[i][j]
          *      j=0,买入
@@ -53,10 +75,10 @@ public:
     {
         vector<vector<int>> dp(2, vector<int>(4, 0));
         dp[0][0] = -prices[0];
-        for(int i = 1;i<prices.size();i++)
+        for (int i = 1; i < prices.size(); i++)
         {
-            dp[1][0] = max(dp[0][0],max(dp[0][1],dp[0][3])-prices[i]);
-            dp[1][1] = max(dp[0][1],dp[0][3]);
+            dp[1][0] = max(dp[0][0], max(dp[0][1], dp[0][3]) - prices[i]);
+            dp[1][1] = max(dp[0][1], dp[0][3]);
             dp[1][2] = dp[0][0] + prices[i];
             dp[1][3] = dp[0][2];
             dp[0][0] = dp[1][0];
@@ -64,6 +86,6 @@ public:
             dp[0][2] = dp[1][2];
             dp[0][3] = dp[1][3];
         }
-        return max(dp[1][1],max(dp[1][2],dp[1][3]));
+        return max(dp[1][1], max(dp[1][2], dp[1][3]));
     }
 };

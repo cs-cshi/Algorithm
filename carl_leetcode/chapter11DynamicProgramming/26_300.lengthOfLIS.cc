@@ -36,9 +36,7 @@ public:
             {
                 if (nums[i] > nums[j])
                     dp[i] = max(dp[i], dp[j] + 1);
-                cout << dp[i] << "  ";
             }
-            cout << endl;
             result = max(result,dp[i]);
         }
         return result;
