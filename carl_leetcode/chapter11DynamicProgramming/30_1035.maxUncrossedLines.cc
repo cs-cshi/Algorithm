@@ -22,7 +22,7 @@ public:
     int maxUncrossedLines(vector<int> &nums1, vector<int> &nums2)
     {
         // dp[i][j] num1 中[0,i-1]与 nums2 中 [0,j-1]最长公共子序列长度
-        // dp[i][j] = dp[i-1][j-1]+1  if nums[i-1]==dp[j-1]
+        // dp[i][j] = dp[i-1][j-1] + 1                if nums[i-1]==dp[j-1]
         //          = max(dp[i-1][j],dp[i][j-1])
         // dp[i][j] = 0
         vector<vector<int>> dp(nums1.size() + 1, vector<int>(nums2.size() + 1, 0));
