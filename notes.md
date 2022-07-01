@@ -9,10 +9,19 @@
 5. 举例推导 dp 数组
 
 ## 递推公式
-- 能否能装满背包（或者最多装多少）：dp[j] = max(dp[j], dp[j - nums[i]] + nums[i]); 
-- 装满背包有几种方法：dp[j] += dp[j - nums[i]] ，对应题目如下：
+- 能否能装满背包（或者最多装多少）：dp[j] = max(dp[j], dp[j - nums[i]] + nums[i])
+   - [416. 分割等和子集](https://leetcode.cn/problems/partition-equal-subset-sum/)
+   - [1049. 最后一块石头的重量 II](https://leetcode.cn/problems/last-stone-weight-ii/)
+- 装满背包有几种方法：dp[j] += dp[j - nums[i]] 
+   - [494. 目标和](https://leetcode.cn/problems/target-sum/)
+   - [518. 零钱兑换 II](https://leetcode.cn/problems/coin-change-2/)
+   - [377. 组合总和 Ⅳ](https://leetcode.cn/problems/combination-sum-iv/)
+   - [70. 爬楼梯进阶版（完全背包）](https://programmercarl.com/0070.%E7%88%AC%E6%A5%BC%E6%A2%AF%E5%AE%8C%E5%85%A8%E8%83%8C%E5%8C%85%E7%89%88%E6%9C%AC.html)
 - 背包装满最大价值：dp[j] = max(dp[j], dp[j - weight[i]] + value[i]); 
+   - [474. 一和零](https://leetcode.cn/problems/ones-and-zeroes/)
 - 装满背包所有物品的最小个数：dp[j] = min(dp[j - coins[i]] + 1, dp[j]);
+   - [322.零钱兑换](https://programmercarl.com/0322.%E9%9B%B6%E9%92%B1%E5%85%91%E6%8D%A2.html)
+   - [279.完全平方数](https://programmercarl.com/0279.%E5%AE%8C%E5%85%A8%E5%B9%B3%E6%96%B9%E6%95%B0.html)
 
 ## 遍历顺序
 ### 0-1 背包
