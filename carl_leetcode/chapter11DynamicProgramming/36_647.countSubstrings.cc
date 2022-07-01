@@ -27,6 +27,7 @@ public:
          *             = true;  |i-j| =1
          *             = dp[i-1][j-1]; |i-j|>1
          * 3. 初始化 false
+         * 4. 遍历顺序：从下往上，从左往右
          */
         vector<vector<bool>> dp(s.size(), vector<bool>(s.size(), false));
         int result = 0;
