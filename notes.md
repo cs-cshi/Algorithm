@@ -23,6 +23,7 @@
 - 装满背包所有物品的最小个数：dp[j] = min(dp[j - coins[i]] + 1, dp[j]);
    - [322.零钱兑换](https://programmercarl.com/0322.%E9%9B%B6%E9%92%B1%E5%85%91%E6%8D%A2.html)
    - [279.完全平方数](https://programmercarl.com/0279.%E5%AE%8C%E5%85%A8%E5%B9%B3%E6%96%B9%E6%95%B0.html)
+   - [HJ16 购物单](https://www.nowcoder.com/practice/f9c6f980eeec43ef85be20755ddbeaf4?tpId=37&tqId=21239&rp=1&ru=/exam/oj/ta&qru=/exam/oj/ta&sourceUrl=%2Fexam%2Foj%2Fta%3Fdifficulty%3D3%26page%3D1%26pageSize%3D50%26search%3D%26tpId%3D37%26type%3D37&difficulty=3&judgeStatus=undefined&tags=&title=)
 
 ### 遍历顺序（0-1 背包）
 - 对于二维数组实现 0-1 背包，外层遍历物品和外层遍历背包容量都可以，内层遍历从小到大正序，因为当前的状态总是根据上一步状态来的，而二维数组下当前状态是空的。
@@ -116,6 +117,7 @@
    - 增（实际上增和删可以理解为 1 个，A 的增相当于 B 的删）
    - 删
    - 换
+- [HJ52 计算字符串的编辑距离](https://www.nowcoder.com/practice/3959837097c7413a961a135d7104c314?tpId=37&tqId=21275&rp=1&ru=/exam/oj/ta&qru=/exam/oj/ta&sourceUrl=%2Fexam%2Foj%2Fta%3Fdifficulty%3D3%26page%3D1%26pageSize%3D50%26search%3D%26tpId%3D37%26type%3D37&difficulty=3&judgeStatus=undefined&tags=&title=)
 
 ## 回文串问题
 ### 回文子串
