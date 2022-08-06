@@ -83,4 +83,62 @@ public:
         // 6. 返回结果
         return int(ans);
     }
+
+    int myAtoi(string s)
+    {
+        // 空格前缀
+        // 正负判定
+        // 开始遍历，直至下一个非数字或者达到结尾
+        // 转换成整数
+        // 越界截断
+
+        // 去除空格前缀
+        int count = 0;
+        for (int i = 0; i < s.size(); i++)
+        {
+            if (s[i] == ' ')
+                count++;
+            else
+                break;
+        }
+
+        if (count > 0)
+            s = s.substr(count, s.size() - count + 1);
+
+        // 正负判定
+        bool flag = true;
+        if (s[0] == '-')
+        {
+            s = s.substr(1, s.size() - 1);
+            flag = false;
+        }
+        else if (s[0] == '+')
+            s = s.substr(1, s.size() - 1);
+
+        // cout << s << endl;
+
+        // cout << INT_MIN << endl;
+
+        int start = 0;
+        int length = 0;
+        int num = 0;
+        int pos = flag ? 1 : -1; // 正负
+        for (int i = 0; i < s.size(); i++)
+        {
+            if (s[i] >= '0' && s[i] <= '9')
+            {
+                int digit = (s[i] - '0') * pos; // 余数
+                // 越界判断
+                if (flag && (INT_MAX - digit) / 10 < num)
+                    return INT_MAX;
+                if (!flag && (INT_MIN - digit) / 10 > num)
+                    return INT_MIN;
+
+                num = num * 10 + digit;
+            }
+            else
+                break;
+        }
+        return num;
+    }
 };
