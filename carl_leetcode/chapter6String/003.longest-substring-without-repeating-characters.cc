@@ -7,12 +7,13 @@
 #include <string>
 #include <algorithm>
 #include <iostream>
+#include <vector>
 
 using namespace std;
 
 int lengthOfLongestSubstring(string s)
 {
-    int arr[128] = {0};            // 滑动窗口内字符是否出现
+    int arr[128] = {0};      // 滑动窗口内字符是否出现
     int left = 0, right = 0; // 滑动窗口
     int ans = 0;
     if (s.size() == 0)
@@ -36,6 +37,29 @@ int lengthOfLongestSubstring(string s)
         }
         arr[s[left]] = 0;
         left++;
+    }
+    return ans;
+}
+
+int lengthOfLongestSubstring2(string s)
+{
+    int n = s.size();
+    if (n == 0 || n == 1)
+        return n;
+    int ans = 0;
+    vector<int> vec(128, 0);
+    int startIndex = 0;
+
+    // 右界移动
+    for (int i = 0; i < n; i++)
+    {
+        vec[s[i]]++;
+
+        // 左界移动
+        while (startIndex <= i && vec[s[i]] > 1)
+            vec[s[startIndex++]]--;
+
+        ans = max(ans, i - startIndex + 1);
     }
     return ans;
 }
