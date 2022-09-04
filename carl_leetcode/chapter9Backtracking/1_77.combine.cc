@@ -34,7 +34,10 @@ public:
         }
 
         // for (int i = startIndex; i <= n; i++)   // 横向，单层搜索
-        // k - path.size <= n - i + 1
+        // 已有 cur.size()
+        // 还需 k - cur.size()
+        // k - cur.size() < n - i + 1
+        // i < n - k + cur.size + 1
         for (int i = startIndex; i <= n - (k - path.size()) + 1; i++) // 剪枝，用 path = 0 是来确定+1，至多从哪里开始遍历
         {
             // 处理节点

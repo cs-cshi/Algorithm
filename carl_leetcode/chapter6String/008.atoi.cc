@@ -141,4 +141,43 @@ public:
         }
         return num;
     }
+
+    int myAtoi3(string s)
+    {
+        // 前缀空格
+        int start = 0;
+        while (s[start] == ' ')
+            start++;
+        s = s.substr(start, s.size() - start + 1);
+
+        // 正负判定
+        int pos = 1;
+        if (s[0] == '-')
+        {
+            pos = -1;
+            s = s.substr(1, s.size() - 1);
+        }
+        else if (s[0] == '+')
+        {
+            s = s.substr(1, s.size() - 1);
+        }
+
+        // 字符串数字结束
+        int ans = 0;
+        int i = 0;
+        while (i < s.size() && s[i] >= '0' && s[i] <= '9')
+        {
+            int digit = (s[i] - '0') * pos;
+            // 溢出判定
+            if (ans > 0 && ans > (INT_MAX - digit) / 10)
+                return INT_MAX;
+
+            if (ans < 0 && ans < (INT_MIN - digit) / 10)
+                return INT_MIN;
+
+            ans = ans * 10 + digit;
+            i++;
+        }
+        return ans;
+    }
 };
